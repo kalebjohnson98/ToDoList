@@ -38,6 +38,7 @@ h3{
     border: 2px solid #ff1493;
     color: #ff1493;
     background-color: white;
+    font-size: 14px;
 }
 .completeTask {
     text-decoration: line-through;
@@ -45,6 +46,10 @@ h3{
 }
 .completeTask .uncompletedTask{
     display: none;
+}
+span{
+    flex-wrap: nowrap;
+    width: 500px;
 }
 #addClick {
     display: block;
@@ -63,9 +68,11 @@ h3{
 .align {
     display: inline-flex;
     flex-direction: column;
+    flex-wrap: nowrap;
 }
 .items {
     display: inline-flex;
+    flex-wrap: nowrap;
     flex-direction: row;
     justify-content: space-between;
     width: 100%;
@@ -74,15 +81,11 @@ h3{
 .spacing {
     display: inline-flex;
     flex-direction: row;
+    flex-wrap: nowrap;
     justify-content: space-between;
     width: 85%;
+    height: 30px;
     margin: 5px 0px;
-}
-.spacing2 {
-    flex-wrap: nowrap;
-}
-.space {
-    display: inline-block;
 }
 .remove {
     display: inline-flex;
@@ -93,5 +96,20 @@ h3{
 
 }
 .removeTask{
+    display: none;
+}
+li {
+    font-size: 18px;
+}
+.edit, .change {
+    display: inline-flex;
+    padding: 5px;
+    border-radius: 10px;
+    border: 2px solid #bbb;
+    color: black;
+    background-color: rgba(187, 187, 187, 0.3);
+    font-size: 14px;
+}
+.gone {
     display: none;
 }

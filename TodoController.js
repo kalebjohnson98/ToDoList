@@ -1,21 +1,23 @@
 "use strict";
 {
-function TodoController(){
-    const vm = this;
-    vm.ToDoList = [
-        {task: " Finish the Lab"},
-        {task: " Play basketball"},
-        {task: " Workout"},
-        {task: " Eat dinner"},
-        {task: " Read for 20 minutes"}]
-    }
-    function addTask(){
-        console.log("adding?");
-        vm.ToDoList.push({'task': newToDo});
-        newToDo = '';
-    };
 
 var fetch = angular.module('ToDoApp', []);
+
+fetch.controller('ToDoListController', ['$scope', '$http', function ($scope, $http){
+    const vm = this;
+    vm.ToDoList = [
+        {task: " Finish the Lab", edit: false},
+        {task: " Play basketball", edit: false},
+        {task: " Workout", edit: false},
+        {task: " Eat dinner", edit: false},
+        {task: " Read for 20 minutes", edit: false}];
+
+    $scope.addTask = function(){
+        vm.ToDoList.push({'task': $scope.newToDo, 'done': false, 'edit': false});
+        $scope.newToDo = '';
+
+    };
+}]);
 
 fetch.controller('complete', ['$scope', '$http', function ($scope, $http) {
     $scope.completeTask = false;
@@ -29,12 +31,9 @@ fetch.controller('complete', ['$scope', '$http', function ($scope, $http) {
     $scope.removeTaskClick = function(){
     $scope.removeTask = true;
     }
-
 }]);
-
 
 angular
     .module("ToDoApp")
-    .controller("TodoController", TodoController);
-
+    .controller("TodoController", ToDoController);
 };

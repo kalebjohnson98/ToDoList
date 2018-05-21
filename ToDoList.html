@@ -6,28 +6,31 @@
     <link href="ToDoList.css" rel="stylesheet" />
 </head>
 
-<body ng-controller="TodoController as list">
-    <div id="toDoBox" ng-controller="complete as ctrl">
+<body ng-controller="ToDoListController as list">
+    <div id="toDoBox">
         <h1>TODO List</h1>
         <h3>A place to store the things you have to do!</h3>
-        <input id="filterAdd" placeholder="Filter your to-dos" type="text" ng-model="filter">
+        <input id="filterAdd" placeholder="Filter your to-dos" type="text" ng-model="newFilter" />
         <ol class="align">
-            <div ng-repeat="toDo in list.ToDoList | filter: ToDoList | orderBy: 'task'" class="spacing">
+            <div class="spacing" ng-repeat="toDo in list.ToDoList | filter: newFilter" ng-controller="complete as ctrl">
                 <div class="items" ng-class='{div: true, removeTask: removeTask}'>
-                    <div>
-                        <li ng-class='{li: true, completeTask: completeTask}'>
-                            <input type="button" value="Complete" class="uncompletedTask" ng-click='completeTaskClick()' />
-                            <span>{{ toDo.task }}</span>
+                    <div class="elements">
+                        <li ng-model="newToDo" ng-class='{li: true, completeTask: completeTask}'>
+                            <input type="button" value="Complete" class="uncompletedTask" ng-click='completeTaskClick()' ng-hide="toDo.edit" />
+                            <span ng-hide="toDo.edit">{{ toDo.task }}</span>
+                            <input class="edit" type="text" name="editText" value="{{toDo.task}}" ng-show="toDo.edit" ng-model="toDo.task" />
                         </li>
                     </div>
                     <div>
+                        <input class="edit" type="button" value="Save" ng-show="toDo.edit" ng-click="toDo.edit=false" />
+                        <input class="change" type="button" value="Edit" ng-hide="toDo.edit" ng-click="toDo.edit=true" ng-class='{gone: completeTask}' />
                         <input class="remove" type="button" value="X" ng-click="removeTaskClick()" />
                     </div>
                 </div>
             </div>
         </ol>
-        <input id="filterAdd" placeholder="Add a to-do" type="text" />
-        <button id="addClick">Add</button>
+        <input id="filterAdd" placeholder="Add a to-do" type="text" ng-model="newToDo" />
+        <input id="addClick" value="Add" type="button" ng-click="addTask()" />
     </div>
 
 
