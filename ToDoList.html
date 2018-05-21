@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html ng-app="ToDoApp">
+
+<head>
+    <link href="https://fonts.googleapis.com/css?family=Open+Sans" rel="stylesheet">
+    <link href="ToDoList.css" rel="stylesheet" />
+</head>
+
+<body ng-controller="TodoController as list">
+    <div id="toDoBox" ng-controller="complete as ctrl">
+        <h1>TODO List</h1>
+        <h3>A place to store the things you have to do!</h3>
+        <input id="filterAdd" placeholder="Filter your to-dos" type="text" ng-model="filter">
+        <ol class="align">
+            <div ng-repeat="toDo in list.ToDoList | filter: ToDoList | orderBy: 'task'" class="spacing">
+                <div class="items" ng-class='{div: true, removeTask: removeTask}'>
+                    <div>
+                        <li ng-class='{li: true, completeTask: completeTask}'>
+                            <input type="button" value="Complete" class="uncompletedTask" ng-click='completeTaskClick()' />
+                            <span>{{ toDo.task }}</span>
+                        </li>
+                    </div>
+                    <div>
+                        <input class="remove" type="button" value="X" ng-click="removeTaskClick()" />
+                    </div>
+                </div>
+            </div>
+        </ol>
+        <input id="filterAdd" placeholder="Add a to-do" type="text" />
+        <button id="addClick">Add</button>
+    </div>
+
+
+    <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.6.10/angular.min.js"></script>
+    <script src="ToDoList.js"></script>
+    <script src="TodoController.js"></script>
+</body>
+
+</html>
